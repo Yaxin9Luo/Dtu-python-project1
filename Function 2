@@ -1,0 +1,24 @@
+import numpy as np
+import sys
+import statistics as st
+def dataStatistics(data, statistic):
+# Insert your code here
+   
+    if statistic=='Mean Temperature':
+        result=np.mean(data[:,0])
+    elif statistic=='Mean Growth rate':
+        result=np.mean(data[:,1])
+    elif statistic=='Std Temperature':
+        result=st.stdev(data[:,0])
+    elif statistic=='Std Growth rate':
+        result=st.stdev(data[:,1])
+    elif statistic=='Rows':
+        result=len(data)
+    elif statistic=='Mean Cold Growth rate':
+        result=np.mean(data[:,1][data[:,0]<20])
+    elif statistic=='Mean Hot Growth rate':
+        result=np.mean(data[:,1][data[:,0]>50])
+    else:
+        print ('Invalid statistic command')
+        sys.exit()
+    return result
