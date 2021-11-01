@@ -1,0 +1,54 @@
+import numpy as np
+import matplotlib.pyplot as plt
+def dataPlot(data):
+
+    plt.title('Number of bacteria')    
+    amount1=np.size(data[:,2][data[:,2]==1])
+    amount2=np.size(data[:,2][data[:,2]==2])
+    amount3=np.size(data[:,2][data[:,2]==3])
+    amount4=np.size(data[:,2][data[:,2]==4])
+    plt.bar([' Salmonella\nenterica','Bacillus cereus',' Listeria','Brochothrix\nthermosphacta'],[amount1,amount2,amount3,amount4], width=0.8, bottom=None, align='center')
+    plt.show()
+    ###################################################################################################################
+    plt.xlabel("Temperature") # Set the x-axis label
+    plt.ylabel("Growth rate")
+    plt.xlim([10, 60])
+    plt.ylim([0,np.max(data[:,1])])
+    #defining coordinates
+    x1 = (data[:,0][data[:,2]==1])
+    y1 = (data[:,1][data[:,2]==1])
+    
+    x2 = (data[:,0][data[:,2]==2])
+    y2 = (data[:,1][data[:,2]==2])
+    
+    x3 = (data[:,0][data[:,2]==3])
+    y3 = (data[:,1][data[:,2]==3])
+    
+    x4 = (data[:,0][data[:,2]==4])
+    y4 = (data[:,1][data[:,2]==4])
+    
+    #ordering points
+    if len(x1)==0:
+        print('No  Salmonella enterica found ')
+    else:
+        x1, y1 =zip(*sorted(zip(x1,y1)))
+    if len(x2)==0:
+        print('No  Bacillus cereus found ')
+    else:
+        x2, y2 =zip(*sorted(zip(x2,y2)))
+    if len(x3)==0:
+        print('No  Listeria found ')
+    else:
+        x3, y3 =zip(*sorted(zip(x3,y3)))
+    if len(x4)==0:
+        print('No  Brochothrix thermosphacta found ')
+    else:
+        x4, y4 =zip(*sorted(zip(x4,y4)))
+    plt.plot(x1, y1) # Plot line graph of x and y
+    plt.plot(x2, y2)
+    plt.plot(x3, y3)
+    plt.plot(x4, y4)
+    #design
+    plt.legend([" Salmonella enterica", "Bacillus cereus",'Listeria','Brochothrix thermosphacta'])
+    plt.title('Growth rate by temperature')
+    plt.show()
