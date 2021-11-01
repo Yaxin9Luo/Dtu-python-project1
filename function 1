@@ -1,0 +1,57 @@
+def dataLoad(filename):
+    import os
+    import sys
+    import numpy as np
+# Insert your code here
+    filein = open(filename, "r")
+    lines = filein.readlines()
+    lines="".join(lines)
+    #check if the file is not empty
+    if os.path.getsize(filename)==0:
+        print('File is empty')
+        sys.exit()
+        
+    lines=lines.split("\n")
+    for i in range(len(lines)):
+        lines[i]="".join(lines[i])
+        lines[i]=lines[i].split(" ")
+        
+    #Checking the temperature
+    row=0
+    k=0
+    l=len(lines)
+    while row<l:
+        #Checking temperature
+        if lines[row][0].isnumeric()==False or float(lines[row][0])<=10 or float(lines[row][0])>=60:
+            print('Invalid temperature in',row+1+k,'row')
+            #if temp is invalid check other data in row
+            if lines[row][1].isnumeric==False or float(lines[row][1])<=0:
+                print('Invalid growth rate in',row+1+k,'row')
+                if lines[row][2]!='2' and lines[row][2]!='1'and lines[row][2]!='3' and lines[row][2]!='4':
+                    print('Invalid bacteria type in',row+1+k,'row')
+            if lines[row][2]!='2' and lines[row][2]!='1'and lines[row][2]!='3' and lines[row][2]!='4':
+                print('Invalid bacteria type in',row+1+k,'row')
+            del(lines[row])
+            l=l-1
+            k+=1
+        #check growth rate
+        elif lines[row][1].isnumeric==False or float(lines[row][1])<=0:
+            print('Invalid growth rate in',row+1+k,'row')
+            #if growth rate is invalid check the third element of row
+            if lines[row][2]!='2' and lines[row][2]!='1'and lines[row][2]!='3' and lines[row][2]!='4':
+                print('Invalid bacteria type in',row+1+k,'row')
+            del(lines[row])
+            l=l-1
+            k+=1
+        #if first 2 elements are ok check the last one
+        elif lines[row][2]!='2' and lines[row][2]!='1'and lines[row][2]!='3' and lines[row][2]!='4':
+            print('Invalid bacteria type in',row+1+k,'row')
+            del(lines[row])
+            l=l-1
+            k+=1
+        #if all data is ok go to next row
+        else:
+            row+=1
+    data=np.array(lines)
+    return data 
+print(dataLoad('1234.txt'))       
