@@ -12,6 +12,7 @@ output result: A scalar containg the calculated statistic
     lower_statistic = lower(statistic) #navoid users' typing errors
     temperatures = data[:,0]
     growth_rates = data[:,1]
+    less,high = mean_grow_depends_tem(data)
     if lower_statistic == 'mean temperature':
         result = np.mean(temperature)
     elif lower_statistic == 'mean growth rate':
@@ -22,7 +23,6 @@ output result: A scalar containg the calculated statistic
         reslut = np.std(growth_rate)
     elif lower_statistic = 'rows':
         return rows_total(data)
-    less,high = mean_grow_depends_tem(data)
     elif lower_statistic = 'mean cold growth rate':
         reslut = less
     elif lower_statistic = 'mean hot growth rate':
