@@ -1,0 +1,17 @@
+def LindIter(System, N):
+# Insert your code here
+    if System=='Koch':
+        new='S'
+        for i in range(N):
+            new=new.replace('S','SLSRSLS')
+    elif System=='Sierpinski':
+        new='A'
+        for i in range(N):
+            new=new.replace('A','BRARB')
+            new=new.replace('B','ALBLA')
+    else:
+        print('Wrong type of system')
+    LindenmayerString=new
+            
+        
+    return LindenmayerString
