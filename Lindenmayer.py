@@ -10,7 +10,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def LindIter(System, N):
-# Insert your code here
     if System=='Koch':
         new='S'
         for i in range(N):
@@ -102,7 +101,62 @@ def turtlePlot(turtleCommands):
     points = x
     x_axis = points[:,0]
     y_axis = points[:,1]
-    graph = plt.plot(x_axis,y_axis)
-    return graph
-#print(turtlePlot(turtleGraph(LindIter('Koch',3))))
-print(turtlePlot(turtleGraph(LindIter('Sierpinski',10))))
+    plt.plot(x_axis,y_axis)
+    plt.show()
+###############################################################################
+def inputNumber(prompt):
+    # INPUTNUMBER Prompts user to input a number
+    #
+    # Usage: num = inputNumber(prompt) Displays prompt and asks user to input a
+    # number. Repeats until user inputs a valid number.
+    #
+    # Author: Mikkel N. Schmidt, mnsc@dtu.dk, 2015
+    while True:
+        try:
+            num = float(input(prompt))
+            break
+        except ValueError:
+            pass
+    return num
+def displayMenu(options):
+    # DISPLAYMENU Displays a menu of options, ask the user to choose an item
+    # and returns the number of the menu item chosen.
+    #
+    # Usage: choice = displayMenu(options)
+    #
+    # Input    options   Menu options (array of strings)
+    # Output   choice    Chosen option (integer)
+    #
+    # Author: Mikkel N. Schmidt, mnsc@dtu.dk, 2015
+    # Display menu options
+    for i in range(len(options)):
+        print("{:d}. {:s}".format(i+1, options[i]))
+    # Get a valid menu choice
+    choice = 0
+    while not(np.any(choice == np.arange(len(options))+1)):
+        choice = inputNumber("Please choose a menu item: ")
+    return choice
+menu_item = np.array(["Choose the type of Lindenmayer system and the number of iterations.", "Generate plots", "Quit"])
+Lindenmayer_options = np.array(["Koch curve","Sierpinski triangle"])
+while True:
+    choice = displayMenu(menu_item)
+    if choice == 1:
+        options = displayMenu(Lindenmayer_options)
+        if options == 1:
+            system_name = 'Koch'
+        elif options == 2:
+            system_name = 'Sierpinski'
+        iteration = int(input("Please enter an iteration number you want:"))
+        while iteration > 10:
+            iteration = int(input("Please choose a number smaller than 10:"))
+    elif choice == 2:
+        plt.title(system_name)
+        turtlePlot(turtleGraph(LindIter(system_name,iteration)))
+    elif choice == 3:
+        break
+
+
+
+
+
+#print(turtlePlot(turtleGraph(LindIter('Sierpinski',10))))
